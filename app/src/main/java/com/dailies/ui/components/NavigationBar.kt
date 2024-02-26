@@ -20,6 +20,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.dailies.R
 import com.dailies.ui.navigation.Screen
+import com.dailies.ui.navigation.screens
 
 @Composable
 fun NavigationBar(
@@ -38,4 +39,32 @@ fun NavigationBar(
         label = stringResource (id = R.string.Week)
     )
     )
+
+    NavigationBar {
+        val navBackStackEntry by navController.currentBackStackEntryAsState()
+        val currentDestination = navBackStackEntry?.destination
+
+        screens.forEach { screen ->
+            val isSelected = currentDestination?.hierarchy?.any {it.route == screen.route} == true
+            val labelText = icons[screen]!!.label
+
+            NavigationBarItem(
+                icon = {
+                    Icon(
+                        imageVector = (if (isSelected)
+                            icons[screen]!!.filledIcon
+                        else
+                            icons[screen]!!.outlineIcon),
+                        contentDescription = labelText
+                    )
+
+                },
+                label = {Text(labelText)},
+                selected = isSelected,
+                onClick = {
+                    navController.navigate(screen.route)
+                }
+            )
+        }
+    }
 }

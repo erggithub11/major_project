@@ -11,3 +11,8 @@ sealed class Screen (
     object Add: Screen("add")
 
 }
+
+val screens = listOf(
+    Screen.Home,
+    Screen.Week,
+)
