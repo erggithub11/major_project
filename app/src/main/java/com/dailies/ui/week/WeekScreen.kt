@@ -49,20 +49,44 @@ fun WeekScreen(modifier: Modifier = Modifier,
         Button(onClick = {},
             modifier = modifier.padding()) {
             Text(
-                text = stringResource(id = R.string.Today_button)
+                text = stringResource(id = R.string.Monday)
             )
         }
         Button(onClick = {},
             modifier = modifier.padding()) {
             Text(
-                text = stringResource(id = R.string.Add_new_daily_button)
+                text = stringResource(id = R.string.Tuesday)
             )
         }
 
         Button(onClick = {},
             modifier = modifier.padding()) {
             Text(
-                text = stringResource(id = R.string.Settings)
+                text = stringResource(id = R.string.Wednesday)
+            )
+        }
+        Button(onClick = {},
+            modifier = modifier.padding()) {
+            Text(
+                text = stringResource(id = R.string.Thursday)
+            )
+        }
+        Button(onClick = {},
+            modifier = modifier.padding()) {
+            Text(
+                text = stringResource(id = R.string.Friday)
+            )
+        }
+        Button(onClick = {},
+            modifier = modifier.padding()) {
+            Text(
+                text = stringResource(id = R.string.Saturday)
+            )
+        }
+        Button(onClick = {},
+            modifier = modifier.padding()) {
+            Text(
+                text = stringResource(id = R.string.Sunday)
             )
         }
 
