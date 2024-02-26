@@ -52,8 +52,6 @@ fun DailyScreen(modifier: Modifier = Modifier,
                 fontSize = 40.sp,
                 modifier = Modifier.padding(start = 10.dp)
             )
-
-
         }
     }
 }
