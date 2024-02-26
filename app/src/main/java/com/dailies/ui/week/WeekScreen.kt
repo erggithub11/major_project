@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import com.dailies.R
+import com.dailies.ui.components.NavBarScaffold
 
 
 @Composable
@@ -34,61 +35,81 @@ fun WeekScreen(modifier: Modifier = Modifier,
 
     val coroutineScope = rememberCoroutineScope()
 
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
-            .padding(10.dp)
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
-    ) {
+    NavBarScaffold(navController = navController,
+        coroutineScope = coroutineScope) {
 
-        Text(text = "Weekly",
-            fontSize = 50.sp,
-            modifier = Modifier.padding(start = 8.dp))
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = modifier
+                .padding(10.dp)
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
+        ) {
 
-        Button(onClick = {},
-            modifier = modifier.padding()) {
             Text(
-                text = stringResource(id = R.string.Monday)
+                text = "Weekly",
+                fontSize = 50.sp,
+                modifier = Modifier.padding(start = 8.dp)
             )
-        }
-        Button(onClick = {},
-            modifier = modifier.padding()) {
-            Text(
-                text = stringResource(id = R.string.Tuesday)
-            )
-        }
 
-        Button(onClick = {},
-            modifier = modifier.padding()) {
-            Text(
-                text = stringResource(id = R.string.Wednesday)
-            )
-        }
-        Button(onClick = {},
-            modifier = modifier.padding()) {
-            Text(
-                text = stringResource(id = R.string.Thursday)
-            )
-        }
-        Button(onClick = {},
-            modifier = modifier.padding()) {
-            Text(
-                text = stringResource(id = R.string.Friday)
-            )
-        }
-        Button(onClick = {},
-            modifier = modifier.padding()) {
-            Text(
-                text = stringResource(id = R.string.Saturday)
-            )
-        }
-        Button(onClick = {},
-            modifier = modifier.padding()) {
-            Text(
-                text = stringResource(id = R.string.Sunday)
-            )
-        }
+            Button(
+                onClick = {},
+                modifier = modifier.padding()
+            ) {
+                Text(
+                    text = stringResource(id = R.string.Monday)
+                )
+            }
+            Button(
+                onClick = {},
+                modifier = modifier.padding()
+            ) {
+                Text(
+                    text = stringResource(id = R.string.Tuesday)
+                )
+            }
 
+            Button(
+                onClick = {},
+                modifier = modifier.padding()
+            ) {
+                Text(
+                    text = stringResource(id = R.string.Wednesday)
+                )
+            }
+            Button(
+                onClick = {},
+                modifier = modifier.padding()
+            ) {
+                Text(
+                    text = stringResource(id = R.string.Thursday)
+                )
+            }
+            Button(
+                onClick = {},
+                modifier = modifier.padding()
+            ) {
+                Text(
+                    text = stringResource(id = R.string.Friday)
+                )
+            }
+            Button(
+                onClick = {},
+                modifier = modifier.padding()
+            ) {
+                Text(
+                    text = stringResource(id = R.string.Saturday)
+                )
+            }
+            Button(
+                onClick = {},
+                modifier = modifier.padding()
+            ) {
+                Text(
+                    text = stringResource(id = R.string.Sunday)
+                )
+            }
+
+        }
     }
 }
