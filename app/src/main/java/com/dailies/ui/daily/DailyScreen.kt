@@ -42,15 +42,15 @@ fun DailyScreen(modifier: Modifier = Modifier,
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = modifier
-                .padding(10.dp)
+                .padding(50.dp)
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
         ) {
 
             Text(
                 text = "placeholder for dailies",
-                fontSize = 50.sp,
-                modifier = Modifier.padding(start = 8.dp)
+                fontSize = 40.sp,
+                modifier = Modifier.padding(start = 10.dp)
             )
 
 
