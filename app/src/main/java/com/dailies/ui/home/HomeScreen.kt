@@ -53,7 +53,7 @@ fun HomeScreen(modifier: Modifier = Modifier,
                 text = stringResource(id = R.string.Today_button)
             )
         }
-        Button(onClick = {},
+        Button(onClick = {navController.navigate(route = Screen.Add.route)},
             modifier = modifier.padding()) {
             Text(
                 text = stringResource(id = R.string.Add_new_daily_button)
