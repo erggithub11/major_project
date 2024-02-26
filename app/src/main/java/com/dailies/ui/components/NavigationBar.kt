@@ -21,6 +21,7 @@ import androidx.navigation.compose.rememberNavController
 import com.dailies.R
 import com.dailies.ui.navigation.Screen
 import com.dailies.ui.navigation.screens
+import com.dailies.ui.theme.DailiesTheme
 
 @Composable
 fun NavigationBar(
@@ -66,5 +67,14 @@ fun NavigationBar(
                 }
             )
         }
+    }
+}
+
+@Preview
+@Composable
+private fun NavigationBarPreview() {
+    val navController = rememberNavController()
+    DailiesTheme(dynamicColor = false) {
+        NavigationBar(navController)
     }
 }
