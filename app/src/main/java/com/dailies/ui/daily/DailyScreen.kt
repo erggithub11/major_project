@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import com.dailies.R
+import com.dailies.ui.components.MainScaffold
 
 
 @Composable
@@ -34,18 +35,25 @@ fun DailyScreen(modifier: Modifier = Modifier,
 
     val coroutineScope = rememberCoroutineScope()
 
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
-            .padding(10.dp)
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
+    MainScaffold (
+        navController = navController,
+        coroutineScope = coroutineScope,
     ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = modifier
+                .padding(10.dp)
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
+        ) {
 
-        Text(text = "placeholder for dailies",
-            fontSize = 50.sp,
-            modifier = Modifier.padding(start = 8.dp))
+            Text(
+                text = "placeholder for dailies",
+                fontSize = 50.sp,
+                modifier = Modifier.padding(start = 8.dp)
+            )
 
 
+        }
     }
 }
