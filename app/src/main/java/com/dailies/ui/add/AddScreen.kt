@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.dailies.ui.components.MainScaffold
 
 @Composable
 fun AddScreenTopLevel(
@@ -31,18 +32,25 @@ fun AddScreen(modifier: Modifier = Modifier,
 
     val coroutineScope = rememberCoroutineScope()
 
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
-            .padding(10.dp)
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
+    MainScaffold (
+        navController = navController,
+        coroutineScope = coroutineScope,
     ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = modifier
+                .padding(10.dp)
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
+        ) {
 
-        Text(text = "placeholder for Adding dailies",
-            fontSize = 50.sp,
-            modifier = Modifier.padding(start = 8.dp))
+            Text(
+                text = "placeholder for Adding dailies",
+                fontSize = 50.sp,
+                modifier = Modifier.padding(start = 8.dp)
+            )
 
 
+        }
     }
 }
