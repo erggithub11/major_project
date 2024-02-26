@@ -4,6 +4,11 @@
     <string name="Add_new_daily_button">Add new Dailies</string>
     <string name="Settings">Setting</string>
 
+    <string name="Home">Home page</string>
+    <string name="Week">Week</string>
+
+
+
     <string name="Monday">Monday</string>
     <string name="Tuesday">Tuesday</string>
     <string name="Wednesday">Wednesday</string>
