@@ -10,10 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.dailies.ui.components.MainScaffold
+import com.dailies.ui.daily.DailyScreenTopLevel
+import com.dailies.ui.theme.DailiesTheme
 
 
 @Composable
@@ -53,5 +57,14 @@ fun SettingScreen(modifier: Modifier = Modifier,
 
 
         }
+    }
+}
+
+@Preview
+@Composable
+fun SettingScreenPreview(){
+    val navController = rememberNavController()
+    DailiesTheme{
+        SettingScreenTopLevel(navController)
     }
 }

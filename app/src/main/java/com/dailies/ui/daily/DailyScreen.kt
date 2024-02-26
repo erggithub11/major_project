@@ -14,9 +14,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import com.dailies.R
 import com.dailies.ui.components.MainScaffold
+import com.dailies.ui.theme.DailiesTheme
 
 
 @Composable
@@ -53,5 +56,14 @@ fun DailyScreen(modifier: Modifier = Modifier,
                 modifier = Modifier.padding(start = 10.dp)
             )
         }
+    }
+}
+
+@Preview
+@Composable
+fun DailyScreenPreview(){
+    val navController = rememberNavController()
+    DailiesTheme{
+        DailyScreenTopLevel(navController)
     }
 }
