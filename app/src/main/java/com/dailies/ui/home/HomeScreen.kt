@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import com.dailies.R
+import com.dailies.ui.components.NavBarScaffold
 import com.dailies.ui.navigation.Screen
 
 
@@ -35,37 +36,42 @@ fun HomeScreen(modifier: Modifier = Modifier,
 
     val coroutineScope = rememberCoroutineScope()
 
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
-            .padding(10.dp)
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
-    ) {
+    NavBarScaffold(navController = navController,
+        coroutineScope = coroutineScope) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = modifier
+                .padding(10.dp)
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
+        ) {
 
-        Text(text = "Dailies logo placeholder",
-            fontSize = 50.sp,
-            modifier = Modifier.padding(start = 8.dp))
+            Text(text = "Dailies logo placeholder",
+                fontSize = 50.sp,
+                modifier = Modifier.padding(start = 8.dp))
 
-        Button(onClick = {navController.navigate(route = Screen.Daily.route)},
-            modifier = modifier.padding()) {
-            Text(
-                text = stringResource(id = R.string.Today_button)
-            )
-        }
-        Button(onClick = {navController.navigate(route = Screen.Add.route)},
-            modifier = modifier.padding()) {
-            Text(
-                text = stringResource(id = R.string.Add_new_daily_button)
-            )
-        }
+            Button(onClick = {navController.navigate(route = Screen.Daily.route)},
+                modifier = modifier.padding()) {
+                Text(
+                    text = stringResource(id = R.string.Today_button)
+                )
+            }
+            Button(onClick = {navController.navigate(route = Screen.Add.route)},
+                modifier = modifier.padding()) {
+                Text(
+                    text = stringResource(id = R.string.Add_new_daily_button)
+                )
+            }
 
-        Button(onClick = {navController.navigate(route = Screen.Setting.route)},
-            modifier = modifier.padding()) {
-            Text(
-                text = stringResource(id = R.string.Settings)
-            )
+            Button(onClick = {navController.navigate(route = Screen.Setting.route)},
+                modifier = modifier.padding()) {
+                Text(
+                    text = stringResource(id = R.string.Settings)
+                )
+            }
+
         }
 
     }
+
 }

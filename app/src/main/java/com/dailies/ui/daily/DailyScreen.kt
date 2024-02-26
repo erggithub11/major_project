@@ -40,7 +40,7 @@ fun DailyScreen(modifier: Modifier = Modifier,
 
     MainScaffold (
         navController = navController,
-        coroutineScope = coroutineScope,
+        coroutineScope = coroutineScope
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
