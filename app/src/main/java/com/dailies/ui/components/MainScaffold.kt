@@ -56,3 +56,26 @@ fun MainScaffold (
     )
 
 }
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun NavBarScaffold (
+    navController: NavHostController,
+    floatingActionButton: @Composable () -> Unit = { },
+    snackbarContent: @Composable (SnackbarData) -> Unit = {},
+    coroutineScope: CoroutineScope,
+    snackbarHostState: SnackbarHostState? = null,
+    pageContent: @Composable (innerPadding: PaddingValues) -> Unit = {},
+
+
+    ){
+    Scaffold(
+        bottomBar = {
+            NavigationBar(navController)
+        },
+        content = {
+                innerPadding -> pageContent (innerPadding)
+        }
+    )
+
+}
