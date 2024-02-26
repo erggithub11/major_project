@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import com.dailies.R
+import com.dailies.ui.navigation.Screen
 
 
 @Composable
@@ -46,7 +47,7 @@ fun HomeScreen(modifier: Modifier = Modifier,
             fontSize = 50.sp,
             modifier = Modifier.padding(start = 8.dp))
 
-        Button(onClick = {},
+        Button(onClick = {navController.navigate(route = Screen.Daily.route)},
             modifier = modifier.padding()) {
             Text(
                 text = stringResource(id = R.string.Today_button)
@@ -59,7 +60,7 @@ fun HomeScreen(modifier: Modifier = Modifier,
             )
         }
 
-        Button(onClick = {},
+        Button(onClick = {navController.navigate(route = Screen.Setting.route)},
             modifier = modifier.padding()) {
             Text(
                 text = stringResource(id = R.string.Settings)
