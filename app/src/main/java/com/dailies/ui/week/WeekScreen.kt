@@ -1,4 +1,4 @@
-package com.dailies.ui.daily
+package com.dailies.ui.week
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -19,17 +19,17 @@ import com.dailies.R
 
 
 @Composable
-fun DailyScreenTopLevel(
+fun WeekScreenTopLevel(
     navController: NavHostController
 ){
 
-    DailyScreen(
+    WeekScreen(
         navController = navController
     )
 }
 
 @Composable
-fun DailyScreen(modifier: Modifier = Modifier,
+fun WeekScreen(modifier: Modifier = Modifier,
                navController: NavHostController){
 
     val coroutineScope = rememberCoroutineScope()
@@ -42,10 +42,29 @@ fun DailyScreen(modifier: Modifier = Modifier,
             .verticalScroll(rememberScrollState()),
     ) {
 
-        Text(text = "placeholder for dailies",
+        Text(text = "Weekly",
             fontSize = 50.sp,
             modifier = Modifier.padding(start = 8.dp))
 
+        Button(onClick = {},
+            modifier = modifier.padding()) {
+            Text(
+                text = stringResource(id = R.string.Today_button)
+            )
+        }
+        Button(onClick = {},
+            modifier = modifier.padding()) {
+            Text(
+                text = stringResource(id = R.string.Add_new_daily_button)
+            )
+        }
+
+        Button(onClick = {},
+            modifier = modifier.padding()) {
+            Text(
+                text = stringResource(id = R.string.Settings)
+            )
+        }
 
     }
 }
