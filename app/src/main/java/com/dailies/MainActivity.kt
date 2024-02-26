@@ -13,9 +13,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.dailies.ui.daily.DailyScreenTopLevel
 import com.dailies.ui.home.HomeScreenTopLevel
 import com.dailies.ui.navigation.Screen
 import com.dailies.ui.theme.DailiesTheme
+import com.dailies.ui.week.WeekScreenTopLevel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +50,10 @@ private fun BuildNavigationGraph(
         composable(Screen.Home.route){
             HomeScreenTopLevel(navController)
         }
+        composable(Screen.Week.route) { WeekScreenTopLevel(navController) }
+        composable(Screen.Daily.route) { DailyScreenTopLevel(navController) }
+
+
 
     }
 
