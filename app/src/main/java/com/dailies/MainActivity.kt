@@ -16,6 +16,7 @@ import androidx.navigation.compose.rememberNavController
 import com.dailies.ui.daily.DailyScreenTopLevel
 import com.dailies.ui.home.HomeScreenTopLevel
 import com.dailies.ui.navigation.Screen
+import com.dailies.ui.settings.SettingScreenTopLevel
 import com.dailies.ui.theme.DailiesTheme
 import com.dailies.ui.week.WeekScreenTopLevel
 
@@ -52,6 +53,7 @@ private fun BuildNavigationGraph(
         }
         composable(Screen.Week.route) { WeekScreenTopLevel(navController) }
         composable(Screen.Daily.route) { DailyScreenTopLevel(navController) }
+        composable(Screen.Setting.route) { SettingScreenTopLevel(navController) }
 
 
 
