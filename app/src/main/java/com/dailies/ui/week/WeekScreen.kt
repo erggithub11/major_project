@@ -1,5 +1,6 @@
 package com.dailies.ui.week
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -7,7 +8,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.Alignment
@@ -52,64 +56,109 @@ fun WeekScreen(modifier: Modifier = Modifier,
                 modifier = Modifier.padding(start = 8.dp)
             )
 
-            Button(
-                onClick = {},
-                modifier = modifier.padding()
+            Row(
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier.fillMaxWidth().padding(8.dp)
             ) {
-                Text(
-                    text = stringResource(id = R.string.Monday)
-                )
-            }
-            Button(
-                onClick = {},
-                modifier = modifier.padding()
-            ) {
-                Text(
-                    text = stringResource(id = R.string.Tuesday)
-                )
+                Button(
+                    onClick = {},
+                    modifier = modifier.padding()
+                        .size(width = 140.dp,height= 60.dp)
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.Monday)
+                    )
+                }
+                Button(
+                    onClick = {},
+                    modifier = modifier.padding()
+                        .size(width = 140.dp,height= 60.dp)
+
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.Tuesday)
+                    )
+                }
             }
 
-            Button(
-                onClick = {},
-                modifier = modifier.padding()
+            Row (
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier.fillMaxWidth().padding(8.dp)
             ) {
-                Text(
-                    text = stringResource(id = R.string.Wednesday)
-                )
-            }
-            Button(
-                onClick = {},
-                modifier = modifier.padding()
-            ) {
-                Text(
-                    text = stringResource(id = R.string.Thursday)
-                )
-            }
-            Button(
-                onClick = {},
-                modifier = modifier.padding()
-            ) {
-                Text(
-                    text = stringResource(id = R.string.Friday)
-                )
-            }
-            Button(
-                onClick = {},
-                modifier = modifier.padding()
-            ) {
-                Text(
-                    text = stringResource(id = R.string.Saturday)
-                )
-            }
-            Button(
-                onClick = {},
-                modifier = modifier.padding()
-            ) {
-                Text(
-                    text = stringResource(id = R.string.Sunday)
-                )
+                Button(
+                    onClick = {},
+                    modifier = modifier.padding()
+                        .size(width = 140.dp,height= 60.dp)
+
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.Wednesday)
+                    )
+                }
+                Button(
+                    onClick = {},
+                    modifier = modifier.padding()
+                        .size(width = 140.dp,height= 60.dp)
+
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.Thursday)
+                    )
+                }
             }
 
+
+            Row (
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier.fillMaxWidth().padding(8.dp)
+            ) {
+                Button(
+                    onClick = {},
+                    modifier = modifier.padding()
+                        .size(width = 140.dp,height= 60.dp)
+
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.Friday)
+                    )
+                }
+                Button(
+                    onClick = {},
+                    modifier = modifier.padding()
+                        .size(width = 140.dp,height= 60.dp)
+
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.Saturday)
+                    )
+                }
+            }
+            Row(
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier.fillMaxWidth().padding(8.dp)
+            )  {
+                Button(
+                    onClick = {},
+                    modifier = modifier.padding()
+                        .size(width = 140.dp,height= 60.dp)
+
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.Sunday)
+                    )
+                }
+
+                Button(
+                    onClick = {},
+                    modifier = modifier.padding()
+                        .size(width = 140.dp,height= 60.dp)
+
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.All)
+                    )
+                }
+            }
         }
     }
 }

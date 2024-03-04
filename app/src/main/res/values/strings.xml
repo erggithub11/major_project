@@ -16,6 +16,8 @@
     <string name="Friday">Friday</string>
     <string name="Saturday">Saturday</string>
     <string name="Sunday">Sunday</string>
+    <string name="All">All</string>
+
 
     <string name="Back">Back</string>
     <string name="Edit">Edit</string>
