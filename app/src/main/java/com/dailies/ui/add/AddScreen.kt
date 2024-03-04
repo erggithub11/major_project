@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.dailies.ui.components.EditScaffold
 import com.dailies.ui.components.MainScaffold
 import com.dailies.ui.daily.DailyScreenTopLevel
 import com.dailies.ui.theme.DailiesTheme
@@ -36,7 +37,7 @@ fun AddScreen(modifier: Modifier = Modifier,
 
     val coroutineScope = rememberCoroutineScope()
 
-    MainScaffold (
+    EditScaffold (
         navController = navController,
         coroutineScope = coroutineScope,
     ) {
