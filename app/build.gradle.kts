@@ -88,4 +88,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose")
     implementation("androidx.compose.runtime:runtime-livedata")
     implementation("com.github.bumptech.glide:compose:1.0.0-alpha.3")
+
+    implementation ("com.maxkeppeler.sheets-compose-dialogs:core:1.3.0")
+    implementation ("com.maxkeppeler.sheets-compose-dialogs:clock:1.3.0")
+
 }
