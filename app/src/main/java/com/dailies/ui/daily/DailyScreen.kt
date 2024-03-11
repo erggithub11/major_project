@@ -8,6 +8,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.Alignment
@@ -15,6 +19,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
@@ -23,6 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import com.dailies.R
 import com.dailies.model.Dailies
 import com.dailies.model.DailiesViewModel
+import com.dailies.ui.components.DailyCard
 import com.dailies.ui.components.MainScaffold
 import com.dailies.ui.theme.DailiesTheme
 
@@ -52,20 +58,35 @@ fun DailyScreen(modifier: Modifier = Modifier,
     MainScaffold (
         navController = navController,
         coroutineScope = coroutineScope
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = modifier
-                .padding(50.dp)
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState()),
-        ) {
+    )
 
-            Text(
-                text = "placeholder for dailies",
-                fontSize = 40.sp,
-                modifier = Modifier.padding(start = 10.dp)
-            )
+
+    {innerPadding ->
+        Column(
+            modifier = modifier
+                .padding(innerPadding)
+                .fillMaxSize()
+        ) {
+            val context = LocalContext.current
+            val state = rememberLazyGridState()
+
+            LazyVerticalGrid(state = state,
+                columns = GridCells.Fixed(1),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 4.dp, bottom = 4.dp)
+                )
+            {
+                items(dailiesList){
+                    DailyCard(
+                        dailies = it,
+                        modifier = Modifier
+                            .padding(end = 4.dp, top = 4.dp)
+
+                    )
+                }
+            }
+
         }
     }
 }

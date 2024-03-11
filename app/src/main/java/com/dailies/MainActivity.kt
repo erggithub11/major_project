@@ -48,7 +48,7 @@ private fun BuildNavigationGraph(
 
 ) {
     val navController = rememberNavController()
-    var startDestination = remember { Screen.Home.route}
+    val startDestination = remember { Screen.Home.route}
 
     NavHost(
         navController = navController,

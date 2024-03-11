@@ -30,7 +30,7 @@ fun DailyCard(
         modifier = Modifier.fillMaxSize()
     ){
         ConstraintLayout {
-            val(nameRef,deleteRef) = createRefs()
+            val(nameRef,timeRef,deleteRef) = createRefs()
 
             Text(
                 text = dailies.name,
@@ -40,7 +40,19 @@ fun DailyCard(
                     .constrainAs(nameRef) {
                         start.linkTo(parent.start)
                         top.linkTo(parent.bottom)
-                        bottom.linkTo(parent.top)
+                        bottom.linkTo(deleteRef.top)
+                    }
+            )
+
+            Text(
+                text = dailies.time.toString(),
+                fontSize = 20.sp,
+                modifier = Modifier
+                    .padding()
+                    .constrainAs(timeRef) {
+                        start.linkTo(parent.start)
+                        top.linkTo(nameRef.bottom)
+                        bottom.linkTo(deleteRef.top)
                     }
             )
 
@@ -49,7 +61,7 @@ fun DailyCard(
                 modifier = Modifier
                     .constrainAs(deleteRef) {
                         end.linkTo(parent.end)
-                        top.linkTo(nameRef.bottom)
+                        top.linkTo(timeRef.bottom)
                         bottom.linkTo(parent.bottom)
                     }
             ) {
