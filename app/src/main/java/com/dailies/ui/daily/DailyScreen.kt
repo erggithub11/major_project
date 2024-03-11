@@ -1,5 +1,6 @@
 package com.dailies.ui.daily
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -43,14 +44,18 @@ fun DailyScreenTopLevel(
 
     DailyScreen(
         navController = navController,
-        dailiesList = dailyList
+        dailiesList = dailyList,
+        removeDailies = {newDailies ->
+            dailiesViewModel.removeDailies(newDailies)
+        }
     )
 }
 
 @Composable
 fun DailyScreen(modifier: Modifier = Modifier,
                navController: NavHostController,
-                dailiesList: List<Dailies> =  listOf()
+                dailiesList: List<Dailies> =  listOf(),
+                removeDailies: (Dailies) -> Unit = {}
                 ){
 
     val coroutineScope = rememberCoroutineScope()
@@ -81,8 +86,15 @@ fun DailyScreen(modifier: Modifier = Modifier,
                     DailyCard(
                         dailies = it,
                         modifier = Modifier
-                            .padding(end = 4.dp, top = 4.dp)
+                            .padding(end = 4.dp, top = 4.dp),
+                        selectAction = {dailies ->
+                        Toast.makeText(context,"Delete ${dailies.name}",Toast.LENGTH_LONG ).show()
+                        },
+                        deleteAction = {dailies ->
+                            removeDailies(dailies)
+                            Toast.makeText(context,"Delete ${dailies.name}",Toast.LENGTH_LONG ).show()
 
+                        }
                     )
                 }
             }

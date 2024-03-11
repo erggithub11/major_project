@@ -20,17 +20,17 @@ class DailiesViewModel (application: Application) : AndroidViewModel(application
         private set
 
 
-    fun loadAllExercise():LiveData<List<Dailies>>{
+    fun loadAllDailies():LiveData<List<Dailies>>{
         return repository.getAllDaily()
     }
 
-    fun insertExercise(newDailies:Dailies){
+    fun insertDailies(newDailies:Dailies){
         viewModelScope.launch(Dispatchers.IO){
             repository.insert(newDailies)
         }
     }
 
-    fun removeExercise(deleteDailies: Dailies){
+    fun removeDailies(deleteDailies: Dailies){
         viewModelScope.launch(Dispatchers.IO) {
             repository.delete(deleteDailies)
         }
