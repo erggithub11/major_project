@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Dailies place_holder</string>
+    <string name="app_name">Dailies</string>
     <string name="Today_button">Today\'s Schedule</string>
     <string name="Add_new_daily_button">Add new Dailies</string>
     <string name="Settings">Setting</string>
