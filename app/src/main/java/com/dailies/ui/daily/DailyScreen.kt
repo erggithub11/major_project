@@ -13,28 +13,39 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.Alignment
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.dailies.R
+import com.dailies.model.Dailies
+import com.dailies.model.DailiesViewModel
 import com.dailies.ui.components.MainScaffold
 import com.dailies.ui.theme.DailiesTheme
 
 
 @Composable
 fun DailyScreenTopLevel(
-    navController: NavHostController
+    navController: NavHostController,
+    dailiesViewModel: DailiesViewModel = viewModel()
 ){
 
+    val dailyList by dailiesViewModel.dailyList.observeAsState(listOf())
+
     DailyScreen(
-        navController = navController
+        navController = navController,
+        dailiesList = dailyList
     )
 }
 
 @Composable
 fun DailyScreen(modifier: Modifier = Modifier,
-               navController: NavHostController){
+               navController: NavHostController,
+                dailiesList: List<Dailies> =  listOf()
+                ){
 
     val coroutineScope = rememberCoroutineScope()
 

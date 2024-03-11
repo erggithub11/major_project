@@ -10,9 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.dailies.model.DailiesViewModel
 import com.dailies.ui.add.AddScreenTopLevel
 import com.dailies.ui.daily.DailyScreenTopLevel
 import com.dailies.ui.edit.EditScreenTopLevel
@@ -42,6 +44,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun BuildNavigationGraph(
 
+    dailiesViewModel: DailiesViewModel = viewModel()
+
 ) {
     val navController = rememberNavController()
     var startDestination = remember { Screen.Home.route}
@@ -54,7 +58,7 @@ private fun BuildNavigationGraph(
             HomeScreenTopLevel(navController)
         }
         composable(Screen.Week.route) { WeekScreenTopLevel(navController) }
-        composable(Screen.Daily.route) { DailyScreenTopLevel(navController) }
+        composable(Screen.Daily.route) { DailyScreenTopLevel(navController,dailiesViewModel) }
         composable(Screen.Setting.route) { SettingScreenTopLevel(navController) }
         composable(Screen.Add.route) { AddScreenTopLevel(navController) }
         composable(Screen.Edit.route) { EditScreenTopLevel(navController) }
