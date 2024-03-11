@@ -26,5 +26,5 @@ interface DailiesDao {
     fun deleteAll()
 
     @Query("SELECT * FROM dailies")
-    fun getAllExercises(): LiveData<List<Dailies>>
+    fun getAllDailies(): LiveData<List<Dailies>>
 }
