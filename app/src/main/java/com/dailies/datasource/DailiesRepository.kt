@@ -13,6 +13,10 @@ class DailiesRepository(application: Application) {
         dailiesDao.insertSingleDaily(dailies)
     }
 
+    fun delete(dailies: Dailies){
+        dailiesDao.deleteDaily(dailies)
+    }
+
     fun insertMultipleDailies(dailies: List<Dailies>){
         dailiesDao.insertMultipleDaily(dailies)
     }
