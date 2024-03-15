@@ -25,6 +25,8 @@
     <string name="logo">Logo</string>
 
     <string name="remove_daily">Remove Daily</string>
+    <string name="add_dailies">Add Daily</string>
+
 
     <string name="DropDown">Dropdown Button</string>
 
