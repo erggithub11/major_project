@@ -55,11 +55,11 @@ fun HomeScreenTopLevel(
 fun HomeScreen(modifier: Modifier = Modifier,
     navController: NavHostController){
 
-
-    val clockState = rememberUseCaseState()
-    ClockDialog(state = clockState, selection = ClockSelection.HoursMinutes{ hours,minutes ->
-        Log.d("SelectedTime","%$hours:$minutes")
-    })
+//
+//    val clockState = rememberUseCaseState()
+//    ClockDialog(state = clockState, selection = ClockSelection.HoursMinutes{ hours,minutes ->
+//        Log.d("SelectedTime","%$hours:$minutes")
+//    })
 
 
     val coroutineScope = rememberCoroutineScope()
@@ -84,9 +84,9 @@ fun HomeScreen(modifier: Modifier = Modifier,
             )
 
             GetTime()
-            Button(onClick = {clockState.show()}) {
-                Text("Time picker")
-            }
+//            Button(onClick = {clockState.show()}) {
+//                Text("Time picker")
+//            }
 
             Button(onClick = {navController.navigate(route = Screen.Daily.route)},
                 modifier = modifier.padding()) {
@@ -118,7 +118,7 @@ fun HomeScreen(modifier: Modifier = Modifier,
 fun GetTime(){
     val calendar = Calendar.getInstance().time
     val time = DateFormat.getTimeInstance(DateFormat.SHORT).format(calendar)
-    Text(text = "$time")
+    Text(text = time)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

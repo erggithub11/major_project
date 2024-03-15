@@ -1,5 +1,6 @@
 package com.dailies.ui.components
 
+import android.icu.util.Calendar
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -17,6 +18,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.res.stringResource
 import com.dailies.R
+import java.text.DateFormat
 
 
 @Composable
@@ -44,8 +46,13 @@ fun DailyCard(
                     }
             )
 
+            //val calendar = dailies.time.toString()
+            //val time = DateFormat.getTimeInstance(DateFormat.SHORT).format(calendar)
+            //val time = DateFormat.getTimeInstance(DateFormat.SHORT).format(dailies.time)
+
             Text(
                 text = dailies.time.toString(),
+                //text = time,
                 fontSize = 20.sp,
                 modifier = Modifier
                     .padding()
