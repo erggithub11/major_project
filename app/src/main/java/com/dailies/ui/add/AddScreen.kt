@@ -1,5 +1,6 @@
 package com.dailies.ui.add
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,6 +11,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -19,6 +21,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SmallTopAppBar
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -46,6 +49,9 @@ import com.dailies.ui.components.EditScaffold
 import com.dailies.ui.components.MainScaffold
 import com.dailies.ui.daily.DailyScreenTopLevel
 import com.dailies.ui.theme.DailiesTheme
+import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
+import com.maxkeppeler.sheets.clock.ClockDialog
+import com.maxkeppeler.sheets.clock.models.ClockSelection
 import java.time.DayOfWeek
 
 @Composable
@@ -71,6 +77,15 @@ fun AddScreen(modifier: Modifier = Modifier,
               insertDailies: (Dailies) -> Unit = {}
 
 ){
+
+    var time by rememberSaveable{mutableStateOf("")}
+
+
+    val clockState = rememberUseCaseState()
+    ClockDialog(state = clockState, selection = ClockSelection.HoursMinutes{ hours, minutes ->
+        Log.d("SelectedTime","%$hours:$minutes")
+        time = ("$hours:$minutes")
+    })
 
     val coroutineScope = rememberCoroutineScope()
 
@@ -149,6 +164,14 @@ fun AddScreen(modifier: Modifier = Modifier,
                     description = it
                 }
             )
+
+            Button(onClick = {clockState.show()}) {
+                Text("Time picker")
+            }
+
+            TextField(value = ("Time: $time"), onValueChange = {
+                time = it
+            })
 
             DayInput (
                 values = dayValue,
