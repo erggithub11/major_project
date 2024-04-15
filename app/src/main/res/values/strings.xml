@@ -4,6 +4,9 @@
     <string name="Add_new_daily_button">Add new Dailies</string>
     <string name="Settings">Setting</string>
 
+    <string name="Request_permission">Request permission</string>
+    <string name="Show_notification">Show notification</string>
+
     <string name="Home">Home page</string>
     <string name="Week">Week</string>
 
