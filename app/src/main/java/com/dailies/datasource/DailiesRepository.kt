@@ -3,7 +3,7 @@ package com.dailies.datasource
 import android.app.Application
 import java.time.LocalDateTime
 import com.dailies.model.Dailies
-
+import java.time.DayOfWeek
 
 
 class DailiesRepository(application: Application) {
@@ -22,4 +22,11 @@ class DailiesRepository(application: Application) {
     }
 
     fun getAllDaily() = dailiesDao.getAllDailies()
+
+    fun getDailiesByDay(
+        day: DayOfWeek
+    ) = dailiesDao.getDailiesbyDay(day)
+
+
+
 }

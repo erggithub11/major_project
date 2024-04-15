@@ -7,6 +7,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import java.time.DayOfWeek
 
 @Dao
 interface DailiesDao {
@@ -27,4 +28,9 @@ interface DailiesDao {
 
     @Query("SELECT * FROM dailies")
     fun getAllDailies(): LiveData<List<Dailies>>
+
+    @Query("SELECT * FROM dailies WHERE day = :day")
+    fun getDailiesbyDay(
+        day: DayOfWeek
+    ): LiveData<List<Dailies>>
 }
