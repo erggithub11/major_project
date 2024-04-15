@@ -86,14 +86,14 @@ fun HomeScreen(modifier: Modifier = Modifier,
         }
     )
 
-    fun showNotification(){
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        val notification = NotificationCompat.Builder(,"channel_id")
-            .setContentText("content text")
-            .setContentTitle("content title")
+     fun showNotification() {
+        val notification = NotificationCompat.Builder(applicationContext, "channel_id")
             .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentTitle("content title")
+            .setContentText("content text")
             .build()
-        notificationManager.notify(1,notification)
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.notify(1, notification)
     }
 
 
