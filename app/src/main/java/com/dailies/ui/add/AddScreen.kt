@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
@@ -19,14 +17,11 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SmallTopAppBar
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -36,18 +31,13 @@ import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import androidx.room.Insert
 import com.dailies.R
 import com.dailies.model.Dailies
 import com.dailies.model.DailiesViewModel
 import com.dailies.ui.components.ButtonSpinner
-import com.dailies.ui.components.EditScaffold
-import com.dailies.ui.components.MainScaffold
-import com.dailies.ui.daily.DailyScreenTopLevel
 import com.dailies.ui.theme.DailiesTheme
 import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
 import com.maxkeppeler.sheets.clock.ClockDialog
@@ -64,7 +54,6 @@ fun AddScreenTopLevel(
         navController = navController,
         insertDailies = { newDailies ->
             dailiesViewModel.insertDailies(newDailies)
-
         }
 
     )
@@ -80,17 +69,23 @@ fun AddScreen(modifier: Modifier = Modifier,
 
     var time by rememberSaveable{mutableStateOf("")}
 
+    var hoursVar by rememberSaveable{mutableStateOf(0)}
+    var minutesVar by rememberSaveable{mutableStateOf(0)}
+
 
     val clockState = rememberUseCaseState()
     ClockDialog(state = clockState, selection = ClockSelection.HoursMinutes{ hours, minutes ->
         Log.d("SelectedTime","%$hours:$minutes")
+        hoursVar = hours
+        minutesVar = minutes
         time = ("$hours:$minutes")
     })
 
     val coroutineScope = rememberCoroutineScope()
 
-    var values = stringArrayResource(R.array.day_array)
+    val values = stringArrayResource(R.array.day_array)
     val dayValue = values.copyOfRange(0,values.size)
+
 
     var day by rememberSaveable { mutableStateOf( dayValue[0] ) }
     var dailiesName by rememberSaveable{mutableStateOf("")}
@@ -103,7 +98,8 @@ fun AddScreen(modifier: Modifier = Modifier,
                 insertDailies(
                     name = dailiesName,
                     desc = description,
-                    //time = time,
+                    hours = hoursVar,
+                    minutes = minutesVar,
                     day = day
                 ) { newDailies ->
                     insertDailies(newDailies)
@@ -188,7 +184,10 @@ fun AddScreen(modifier: Modifier = Modifier,
 }
 
 @Composable
-fun DayInput(values: Array<String>, modifier: Modifier, updateDay: (String) -> Unit)
+fun DayInput(
+    values: Array<String>,
+    modifier: Modifier,
+    updateDay: (String) -> Unit)
 {
     ButtonSpinner(
         items = values.asList(),
@@ -226,37 +225,23 @@ OutlinedTextField(value = dailiesName,
 }
 
 
-//    EditScaffold (
-//        navController = navController,
-//        coroutineScope = coroutineScope,
-//    ) {
-//        Column(
-//            horizontalAlignment = Alignment.CenterHorizontally,
-//            modifier = modifier
-//                .padding(10.dp)
-//                .fillMaxSize()
-//                .verticalScroll(rememberScrollState()),
-//        ) {
-//
-//            Text(
-//                text = "placeholder for Adding dailies",
-//                fontSize = 50.sp,
-//                modifier = Modifier.padding(start = 8.dp)
-//            )
-//
-//
-//        }
-//    }
-// }
 
-fun insertDailies(name: String, desc: String, day: String,
+fun insertDailies(name: String,
+                  desc: String,
+                  hours: Int,
+                  minutes: Int,
+                  day: String,
                   doInsert: (Dailies) -> Unit = {}) {
     if (name.isNotEmpty()){
         val dailies = Dailies (
             id = 0,
             name = name,
             description = desc,
-            day = DayOfWeek.valueOf(day.uppercase())
+            day = DayOfWeek.valueOf(day.uppercase()),
+            hour = hours,
+            minute = minutes,
+            notify = false
+
 
         )
         doInsert(dailies)

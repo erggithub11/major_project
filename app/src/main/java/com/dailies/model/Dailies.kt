@@ -1,7 +1,6 @@
 package com.dailies.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.time.LocalDateTime
 import java.time.DayOfWeek
 
 @Entity(tableName ="dailies")
@@ -11,7 +10,9 @@ data class Dailies(
     var name: String,
     var description: String,
     var day: DayOfWeek,
-    var time: LocalDateTime = LocalDateTime.now()
+    var hour: Int,
+    var minute: Int,
+    var notify: Boolean
 ){
 
 }

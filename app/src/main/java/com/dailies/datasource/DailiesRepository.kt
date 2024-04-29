@@ -27,6 +27,14 @@ class DailiesRepository(application: Application) {
         day: DayOfWeek
     ) = dailiesDao.getDailiesbyDay(day)
 
+    fun getDailiesByNotify(
+        on: Boolean
+    ) = dailiesDao.getDailiesbyNotify(on)
+
+    fun updateDailies(
+        dailies: Dailies
+    ) = dailiesDao.updateDaily(dailies)
+
 
 
 }

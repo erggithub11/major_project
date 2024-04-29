@@ -21,6 +21,33 @@ class DailiesViewModel (application: Application) : AndroidViewModel(application
     var dailyList: LiveData<List<Dailies>> = repository.getAllDaily()
         private set
 
+    var mondayList: LiveData<List<Dailies>> = repository.getDailiesByDay(DayOfWeek.MONDAY)
+        private set
+
+    var tuesdayList: LiveData<List<Dailies>> = repository.getDailiesByDay(DayOfWeek.TUESDAY)
+        private set
+
+    var wednesdayList: LiveData<List<Dailies>> = repository.getDailiesByDay(DayOfWeek.WEDNESDAY)
+        private set
+
+    var thursdayList: LiveData<List<Dailies>> = repository.getDailiesByDay(DayOfWeek.THURSDAY)
+        private set
+
+    var fridayList: LiveData<List<Dailies>> = repository.getDailiesByDay(DayOfWeek.FRIDAY)
+        private set
+
+    var saturdayList: LiveData<List<Dailies>> = repository.getDailiesByDay(DayOfWeek.SATURDAY)
+        private set
+
+    var sundayList: LiveData<List<Dailies>> = repository.getDailiesByDay(DayOfWeek.SUNDAY)
+        private set
+
+    var notifyList: LiveData<List<Dailies>> = repository.getDailiesByNotify(true)
+        private set
+
+    var currentDaily by mutableStateOf<Dailies?>(null)
+        private set
+
 
     fun loadAllDailies():LiveData<List<Dailies>>{
         return repository.getAllDaily()
@@ -70,7 +97,16 @@ class DailiesViewModel (application: Application) : AndroidViewModel(application
         }
     }
 
+    companion object {
+        lateinit var currentDaily: Dailies
+    }
 
+    fun updateDaily(dailies:Dailies){
+        viewModelScope.launch(Dispatchers.IO){
+            repository.updateDailies(dailies)
+        }
+
+    }
 
 
 }

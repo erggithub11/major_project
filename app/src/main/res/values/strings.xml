@@ -3,9 +3,7 @@
     <string name="Today_button">Today\'s Schedule</string>
     <string name="Add_new_daily_button">Add new Dailies</string>
     <string name="Settings">Setting</string>
-
-    <string name="Request_permission">Request permission</string>
-    <string name="Show_notification">Show notification</string>
+    <string name="Testing">Testing</string>
 
     <string name="Home">Home page</string>
     <string name="Week">Week</string>
@@ -24,11 +22,18 @@
 
     <string name="Back">Back</string>
     <string name="Edit">Edit</string>
+    <string name="Add">Add</string>
 
     <string name="logo">Logo</string>
 
     <string name="remove_daily">Remove Daily</string>
     <string name="add_dailies">Add Daily</string>
+    <string name="turn_on_daily">Turn on Daily</string>
+    <string name="turn_off_daily">Turn off Daily</string>
+
+    <string name="edit_daily">Edit Daily</string>
+
+
 
 
     <string name="DropDown">Dropdown Button</string>

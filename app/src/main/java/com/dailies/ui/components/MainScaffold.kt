@@ -2,6 +2,7 @@ package com.dailies.ui.components
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddAlarm
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -55,7 +56,7 @@ fun MainScaffold (
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditScaffold (
+fun AddScaffold (
     navController: NavHostController,
     floatingActionButton: @Composable () -> Unit = { },
     snackbarContent: @Composable (SnackbarData) -> Unit = {},
@@ -76,10 +77,10 @@ fun EditScaffold (
                     }
                 },
                 actions = {
-                    IconButton(onClick = {navController.navigate(route = Screen.Edit.route)}) {
+                    IconButton(onClick = {navController.navigate(route = Screen.Add.route)}) {
                         Icon (
-                            imageVector = Icons.Filled.Edit,
-                            contentDescription = stringResource(R.string.Back)
+                            imageVector = Icons.Filled.AddAlarm,
+                            contentDescription = stringResource(R.string.Add)
                         )
                     }
                 }

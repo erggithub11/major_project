@@ -62,33 +62,49 @@ abstract class DailiesDatabase: RoomDatabase() {
              */
             val daily1 = Dailies(
                 0,
-                "test1",
-                "description",
+                "ThursdayTest",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tempor orci vel ",
                 DayOfWeek.THURSDAY,
-                LocalDateTime.now()
+                20,
+                20,
+                false
             )
             val daily4 = Dailies(
                 0,
-                "test4",
-                "description",
+                "Saturday Test",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tempor orci vel ",
                 DayOfWeek.SATURDAY,
-                LocalDateTime.now()
+                19,
+                20,
+                false
 
             )
             val daily2 = Dailies(
                 0,
-                "test2",
-                "description",
+                "Tuesday Test",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tempor orci vel ",
                 DayOfWeek.TUESDAY,
-                LocalDateTime.now()
+                12,20,
+                false
 
             )
             val daily3 = Dailies(
                 0,
-                "test3",
-                "description",
+                "Long description Test",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tempor orci vel felis rutrum posuere. Integer sit amet purus at nulla dictum efficitur. Nulla porta lectus eget rhoncus ultricies. Nullam rutrum augue non erat gravida, a molestie purus varius. Proin nunc ipsum, suscipit sed rhoncus finibus, sagittis interdum lorem. Vestibulum nec purus ipsum. Pellentesque dapibus varius felis, at convallis diam. Nulla lacinia sapien ac iaculis porta. Donec commodo consectetur sem non interdum. Vivamus sollicitudin lorem id ex sodales consectetur. Phasellus mauris nisl, pellentesque at neque quis, fringilla rutrum sem. Sed convallis volutpat purus ac scelerisque. Nam in blandit odio. ",
                 DayOfWeek.MONDAY,
-                LocalDateTime.now()
+                11,11,
+                false
+
+            )
+
+            val daily5 = Dailies(
+                0,
+                "Notify on Daily Wednesday",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tempor orci vel felis rutrum posuere. Integer sit amet purus at nulla dictum efficitur. Nulla porta lectus eget rhoncus ultricies. Nullam rutrum augue non erat gravida, a molestie purus varius. Proin nunc ipsum, suscipit sed rhoncus finibus, sagittis interdum lorem. Vestibulum nec purus ipsum. Pellentesque dapibus varius felis, at convallis diam. Nulla lacinia sapien ac iaculis porta. Donec commodo consectetur sem non interdum. Vivamus sollicitudin lorem id ex sodales consectetur. Phasellus mauris nisl, pellentesque at neque quis, fringilla rutrum sem. Sed convallis volutpat purus ac scelerisque. Nam in blandit odio. ",
+                DayOfWeek.WEDNESDAY,
+                9,30,
+                true
 
             )
             /**
@@ -98,7 +114,8 @@ abstract class DailiesDatabase: RoomDatabase() {
                 daily1,
                 daily2,
                 daily3,
-                daily4
+                daily4,
+                daily5
             )
 
             val dao = instance.dailiesDao()

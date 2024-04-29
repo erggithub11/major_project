@@ -1,10 +1,14 @@
 package com.dailies.ui.components
 
-import android.icu.util.Calendar
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AlarmOff
+import androidx.compose.material.icons.filled.AlarmOn
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.Card
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
@@ -12,64 +16,78 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.dailies.model.Dailies
-import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.compose.material3.Text
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.res.stringResource
 import com.dailies.R
-import java.text.DateFormat
+import com.dailies.ui.theme.md_theme_light_onPrimary
 
 
 @Composable
 fun DailyCard(
-    modifier: Modifier = Modifier,
     dailies: Dailies,
-    selectAction: (Dailies) -> Unit = {},
-    deleteAction: (Dailies) -> Unit = {}
-    ){
+    thirtyMinAction: (Dailies) -> Unit = {},
+    editAction:(Dailies) -> Unit = {},
+    deleteAction: (Dailies) -> Unit = {},
+    unNotifyAction: (Dailies) -> Unit = {}
+
+){
     Card(
         modifier = Modifier.fillMaxSize()
     ){
         ConstraintLayout {
-            val(nameRef,timeRef,deleteRef) = createRefs()
+            val(nameRef,timeRef
+                    ,deleteRef,selectRef,descRef,editRef,unnotifyRef
+            ) = createRefs()
+
+            val hourText = dailies.hour.toString()
+            val minuteText = dailies.minute.toString()
 
             Text(
                 text = dailies.name,
-                fontSize = 20.sp,
+                fontSize = 30.sp,
                 modifier = Modifier
+
                     .padding()
+                    .background(color = md_theme_light_onPrimary )
                     .constrainAs(nameRef) {
-                        start.linkTo(parent.start)
-                        top.linkTo(parent.bottom)
-                        bottom.linkTo(deleteRef.top)
+                        top.linkTo(parent.top)
                     }
+
             )
 
-            //val calendar = dailies.time.toString()
-            //val time = DateFormat.getTimeInstance(DateFormat.SHORT).format(calendar)
-            //val time = DateFormat.getTimeInstance(DateFormat.SHORT).format(dailies.time)
-
             Text(
-                text = dailies.time.toString(),
-                //text = time,
-                fontSize = 20.sp,
+                text = ("$hourText : $minuteText"),
+                fontSize = 40.sp,
                 modifier = Modifier
                     .padding()
                     .constrainAs(timeRef) {
-                        start.linkTo(parent.start)
                         top.linkTo(nameRef.bottom)
-                        bottom.linkTo(deleteRef.top)
+                        bottom.linkTo(descRef.top)
                     }
             )
+
+            Text(
+                text = (dailies.description),
+                fontSize = 20.sp,
+                modifier = Modifier
+                    .padding()
+                    .constrainAs(descRef) {
+                        top.linkTo(timeRef.bottom)
+                    }
+            )
+
 
             IconButton(onClick = {
                 deleteAction(dailies)},
                 modifier = Modifier
                     .constrainAs(deleteRef) {
-                        end.linkTo(parent.end)
-                        top.linkTo(timeRef.bottom)
-                        bottom.linkTo(parent.bottom)
+                        start.linkTo(timeRef.end)
+                        end.linkTo(selectRef.start)
+                        top.linkTo(nameRef.bottom)
+                        bottom.linkTo(descRef.top)
+
                     }
             ) {
                 Icon(
@@ -79,9 +97,64 @@ fun DailyCard(
                 )
 
             }
+
+            IconButton(onClick = {
+                thirtyMinAction(dailies)},
+                modifier = Modifier
+                    .constrainAs(selectRef) {
+                        start.linkTo(deleteRef.end)
+                        end.linkTo(editRef.start)
+                        top.linkTo(nameRef.bottom)
+                        bottom.linkTo(descRef.top)
+
+                    }
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.AlarmOn,
+                    tint = MaterialTheme.colorScheme.primary,
+                    contentDescription = stringResource(R.string.turn_on_daily)
+                )
+
+            }
+
+            IconButton(onClick = {
+                editAction(dailies)},
+                modifier = Modifier
+                    .constrainAs(editRef) {
+                        start.linkTo(selectRef.end)
+                        end.linkTo(unnotifyRef.end)
+                        top.linkTo(nameRef.bottom)
+                        bottom.linkTo(descRef.top)
+
+                    }
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Edit,
+                    tint = MaterialTheme.colorScheme.primary,
+                    contentDescription = stringResource(R.string.edit_daily)
+                )
+
+            }
+
+            IconButton(onClick = {
+                unNotifyAction(dailies)},
+                modifier = Modifier
+                    .constrainAs(unnotifyRef) {
+                        start.linkTo(editRef.end)
+                        end.linkTo(parent.end)
+                        top.linkTo(nameRef.bottom)
+                        bottom.linkTo(descRef.top)
+
+                    }
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.AlarmOff,
+                    tint = MaterialTheme.colorScheme.primary,
+                    contentDescription = stringResource(R.string.turn_off_daily)
+                )
+
+            }
         }
-
-
 
     }
 }

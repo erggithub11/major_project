@@ -33,4 +33,9 @@ interface DailiesDao {
     fun getDailiesbyDay(
         day: DayOfWeek
     ): LiveData<List<Dailies>>
+
+    @Query("SELECT * FROM dailies WHERE notify =:notify")
+    fun getDailiesbyNotify(
+        notify : Boolean
+    ): LiveData<List<Dailies>>
 }

@@ -21,6 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import com.dailies.R
 import com.dailies.ui.components.NavBarScaffold
+import com.dailies.ui.navigation.Screen
 
 
 @Composable
@@ -61,7 +62,9 @@ fun WeekScreen(modifier: Modifier = Modifier,
                 modifier = Modifier.fillMaxWidth().padding(8.dp)
             ) {
                 Button(
-                    onClick = {},
+                    onClick = {
+                        navController.navigate(route = Screen.Monday.route)
+                    },
                     modifier = modifier.padding()
                         .size(width = 140.dp,height= 60.dp)
                 ) {
@@ -70,7 +73,9 @@ fun WeekScreen(modifier: Modifier = Modifier,
                     )
                 }
                 Button(
-                    onClick = {},
+                    onClick = {
+                        navController.navigate(route = Screen.Tuesday.route)
+                    },
                     modifier = modifier.padding()
                         .size(width = 140.dp,height= 60.dp)
 
@@ -86,7 +91,9 @@ fun WeekScreen(modifier: Modifier = Modifier,
                 modifier = Modifier.fillMaxWidth().padding(8.dp)
             ) {
                 Button(
-                    onClick = {},
+                    onClick = {
+                        navController.navigate(route = Screen.Wednesday.route)
+                    },
                     modifier = modifier.padding()
                         .size(width = 140.dp,height= 60.dp)
 
@@ -96,7 +103,9 @@ fun WeekScreen(modifier: Modifier = Modifier,
                     )
                 }
                 Button(
-                    onClick = {},
+                    onClick = {
+                        navController.navigate(route = Screen.Thursday.route)
+                    },
                     modifier = modifier.padding()
                         .size(width = 140.dp,height= 60.dp)
 
@@ -113,7 +122,9 @@ fun WeekScreen(modifier: Modifier = Modifier,
                 modifier = Modifier.fillMaxWidth().padding(8.dp)
             ) {
                 Button(
-                    onClick = {},
+                    onClick = {
+                        navController.navigate(route = Screen.Friday.route)
+                    },
                     modifier = modifier.padding()
                         .size(width = 140.dp,height= 60.dp)
 
@@ -123,7 +134,9 @@ fun WeekScreen(modifier: Modifier = Modifier,
                     )
                 }
                 Button(
-                    onClick = {},
+                    onClick = {
+                        navController.navigate(route = Screen.Saturday.route)
+                    },
                     modifier = modifier.padding()
                         .size(width = 140.dp,height= 60.dp)
 
@@ -138,7 +151,9 @@ fun WeekScreen(modifier: Modifier = Modifier,
                 modifier = Modifier.fillMaxWidth().padding(8.dp)
             )  {
                 Button(
-                    onClick = {},
+                    onClick = {
+                        navController.navigate(route = Screen.Sunday.route)
+                    },
                     modifier = modifier.padding()
                         .size(width = 140.dp,height= 60.dp)
 
@@ -149,7 +164,9 @@ fun WeekScreen(modifier: Modifier = Modifier,
                 }
 
                 Button(
-                    onClick = {},
+                    onClick = {
+                        navController.navigate(route = Screen.Daily.route)
+                    },
                     modifier = modifier.padding()
                         .size(width = 140.dp,height= 60.dp)
 

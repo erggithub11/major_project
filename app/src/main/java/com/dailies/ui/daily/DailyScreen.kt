@@ -1,5 +1,7 @@
 package com.dailies.ui.daily
 
+import com.dailies.NotificationService
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,6 +29,7 @@ import com.dailies.model.DailiesViewModel
 import com.dailies.ui.components.DailyCard
 import com.dailies.ui.components.MainScaffold
 import com.dailies.ui.components.SearchComponent
+import com.dailies.ui.navigation.Screen
 import com.dailies.ui.theme.DailiesTheme
 
 
@@ -47,7 +50,10 @@ fun DailyScreenTopLevel(
         },
         removeDailies = {newDailies ->
             dailiesViewModel.removeDailies(newDailies)
-        }
+        },
+        dailiesUpdate = {newDailies ->
+            dailiesViewModel.updateDaily(newDailies)
+        },
     )
 }
 
@@ -57,7 +63,9 @@ fun DailyScreen(modifier: Modifier = Modifier,
                 dailiesList: List<Dailies> =  listOf(),
                 dailiesSearch: DailiesSearch = DailiesSearch(),
                 updateSearchCriteria: (DailiesSearch) -> Unit = {},
-                removeDailies: (Dailies) -> Unit = {}
+                removeDailies: (Dailies) -> Unit = {},
+                dailiesUpdate: (Dailies) -> Unit = {},
+
                 ){
 
     val coroutineScope = rememberCoroutineScope()
@@ -77,6 +85,7 @@ fun DailyScreen(modifier: Modifier = Modifier,
             val dayList = stringArrayResource(id = R.array.day_array).toList()
             val context = LocalContext.current
             val state = rememberLazyGridState()
+            val notificationService= NotificationService(context)
 
             SearchComponent(dailiesSearch = dailiesSearch, dayList = dayList){
                 updateSearchCriteria(it)
@@ -92,14 +101,29 @@ fun DailyScreen(modifier: Modifier = Modifier,
                 items(dailiesList){
                     DailyCard(
                         dailies = it,
-                        modifier = Modifier
-                            .padding(end = 4.dp, top = 4.dp),
-                        selectAction = {dailies ->
-                        Toast.makeText(context,"Delete ${dailies.name}",Toast.LENGTH_LONG ).show()
+                        thirtyMinAction = { dailies ->
+                            Toast.makeText(context,"Notification for ${dailies.name} will activate in 30 minute",Toast.LENGTH_LONG ).show()
+                            dailies.notify = true
+                            dailiesUpdate(dailies)
+                            notificationService.show30MinDailiesNotification(dailies.name,dailies.description,dailies.hour,dailies.minute)
+
+                        },
+                        editAction = {dailies ->
+                            Toast.makeText(context,"Edit ${dailies.name}",Toast.LENGTH_LONG ).show()
+                            DailiesViewModel.currentDaily = dailies
+                            Log.d("editScreen", DailiesViewModel.currentDaily.name)
+                            navController.navigate(route = Screen.Edit.route)
                         },
                         deleteAction = {dailies ->
                             removeDailies(dailies)
                             Toast.makeText(context,"Delete ${dailies.name}",Toast.LENGTH_LONG ).show()
+                        }
+                        ,
+                        unNotifyAction = {dailies ->
+                            Toast.makeText(context,"${dailies.name} has been turned off",Toast.LENGTH_LONG ).show()
+                            dailies.notify = false
+                            dailiesUpdate(dailies)
+
 
                         }
                     )
