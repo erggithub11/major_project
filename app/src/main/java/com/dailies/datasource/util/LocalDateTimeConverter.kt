@@ -3,6 +3,7 @@ package com.dailies.datasource.util
 import androidx.room.TypeConverter
 import java.time.Instant
 import java.time.LocalDateTime
+import java.time.LocalTime
 import java.time.ZoneId
 import java.util.*
 
@@ -22,4 +23,5 @@ object LocalDateTimeConverter {
     @JvmStatic
     fun toTimestamp(localDateTime: LocalDateTime): Long =
         localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
+    
 }

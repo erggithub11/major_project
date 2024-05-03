@@ -26,6 +26,7 @@ import com.dailies.R
 import com.dailies.model.Dailies
 import com.dailies.model.DailiesSearch
 import com.dailies.model.DailiesViewModel
+import com.dailies.ui.components.AddScaffold
 import com.dailies.ui.components.DailyCard
 import com.dailies.ui.components.MainScaffold
 import com.dailies.ui.components.SearchComponent
@@ -72,7 +73,7 @@ fun DailyScreen(
 
     rememberCoroutineScope()
 
-    MainScaffold (
+    AddScaffold (
         navController = navController
     )
 
@@ -84,6 +85,9 @@ fun DailyScreen(
                 .fillMaxSize()
         ) {
 
+            /**
+             * Day list value are needed to be produced here so it can be used within the search component
+             */
             /**
              * Day list value are needed to be produced here so it can be used within the search component
              */
@@ -108,11 +112,20 @@ fun DailyScreen(
                         /**
                          * The dailies data allows the data to be outputted into strings
                          */
+                        /**
+                         * The dailies data allows the data to be outputted into strings
+                         */
                         dailies = it,
                         /**
                          * The functions below are activated where the buttons are pressed
                          */
+                        /**
+                         * The functions below are activated where the buttons are pressed
+                         */
                         thirtyMinAction = { dailies ->
+                            /**
+                             * Toast are pop up window that comes up when activated
+                             */
                             /**
                              * Toast are pop up window that comes up when activated
                              */
@@ -122,7 +135,14 @@ fun DailyScreen(
                              * Notify value is changed to true prior update
                              * Notify value will not be changed to true outside of this program if it didn't get updated via dao
                              */
+                            /**
+                             * Notify value is changed to true prior update
+                             * Notify value will not be changed to true outside of this program if it didn't get updated via dao
+                             */
                             dailiesUpdate(dailies)
+                            /**
+                             * notification function requires specific value from the dailies
+                             */
                             /**
                              * notification function requires specific value from the dailies
                              */
@@ -134,10 +154,16 @@ fun DailyScreen(
                             /**
                              * The variable below are saved into the dailies viewmodel so it can be reused in the edit screen
                              */
+                            /**
+                             * The variable below are saved into the dailies viewmodel so it can be reused in the edit screen
+                             */
                             DailiesViewModel.currentDaily = dailies
                             navController.navigate(route = Screen.Edit.route)
                         },
                         deleteAction = {dailies ->
+                            /**
+                             * Dailies are removed via the use of dao
+                             */
                             /**
                              * Dailies are removed via the use of dao
                              */

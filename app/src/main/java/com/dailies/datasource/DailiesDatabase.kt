@@ -14,6 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.DayOfWeek
 
+
 @Database(entities = [Dailies::class],version = 1)
 @TypeConverters(DayConverter::class, LocalDateTimeConverter::class)
 abstract class DailiesDatabase: RoomDatabase() {
@@ -97,7 +98,7 @@ abstract class DailiesDatabase: RoomDatabase() {
             val daily3 = Dailies(
                 0,
                 "Long description Test",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tempor orci vel felis rutrum posuere. Integer sit amet purus at nulla dictum efficitur. Nulla porta lectus eget rhoncus ultricies. Nullam rutrum augue non erat gravida, a molestie purus varius. Proin nunc ipsum, suscipit sed rhoncus finibus, sagittis interdum lorem. Vestibulum nec purus ipsum. Pellentesque dapibus varius felis, at convallis diam. Nulla lacinia sapien ac iaculis porta. Donec commodo consectetur sem non interdum. Vivamus sollicitudin lorem id ex sodales consectetur. Phasellus mauris nisl, pellentesque at neque quis, fringilla rutrum sem. Sed convallis volutpat purus ac scelerisque. Nam in blandit odio. ",
+                " fringilla rutrum sem. Sed convallis volutpat purus ac scelerisque. Nam in blandit odio. ",
                 DayOfWeek.MONDAY,
                 11,11,
                 false
@@ -107,7 +108,7 @@ abstract class DailiesDatabase: RoomDatabase() {
             val daily5 = Dailies(
                 0,
                 "Notify on Daily Wednesday",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tempor orci vel felis rutrum posuere. Integer sit amet purus at nulla dictum efficitur. Nulla porta lectus eget rhoncus ultricies. Nullam rutrum augue non erat gravida, a molestie purus varius. Proin nunc ipsum, suscipit sed rhoncus finibus, sagittis interdum lorem. Vestibulum nec purus ipsum. Pellentesque dapibus varius felis, at convallis diam. Nulla lacinia sapien ac iaculis porta. Donec commodo consectetur sem non interdum. Vivamus sollicitudin lorem id ex sodales consectetur. Phasellus mauris nisl, pellentesque at neque quis, fringilla rutrum sem. Sed convallis volutpat purus ac scelerisque. Nam in blandit odio. ",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Proin nunc ipsum, suscipit sed rhoncus finibus, sagittis interdum lorem. Vestibulum nec purus ipsum. Pellentesque dapibus varius felis, at convallis diam. Nulla lacinia sapien ac iaculis porta. Donec commodo consectetur sem non interdum. Vivamus sollicitudin lorem id ex sodales consectetur. Phasellus mauris nisl, pellentesque at neque quis, fringilla rutrum sem. Sed convallis volutpat purus ac scelerisque. Nam in blandit odio. ",
                 DayOfWeek.WEDNESDAY,
                 9,30,
                 true
