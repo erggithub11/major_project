@@ -51,28 +51,32 @@ fun AddScreenTopLevel(
 
 ){
     AddScreen(
-        navController = navController,
-        insertDailies = { newDailies ->
-            dailiesViewModel.insertDailies(newDailies)
-        }
+        navController = navController
 
-    )
+    ) { newDailies ->
+        dailiesViewModel.insertDailies(newDailies)
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddScreen(modifier: Modifier = Modifier,
-                  navController: NavHostController,
-              insertDailies: (Dailies) -> Unit = {}
+fun AddScreen(
+    navController: NavHostController,
+    insertDailies: (Dailies) -> Unit = {}
 
 ){
 
+    /**
+     * These variables below are created to be mutable and are purposed to be inserted into the database.
+     */
     var time by rememberSaveable{mutableStateOf("")}
-
     var hoursVar by rememberSaveable{mutableStateOf(0)}
     var minutesVar by rememberSaveable{mutableStateOf(0)}
 
 
+    /**
+     * The clock dialog allows the clock Ui to be available and it saves te selected value chosen by the clock into the variable previously created.
+     */
     val clockState = rememberUseCaseState()
     ClockDialog(state = clockState, selection = ClockSelection.HoursMinutes{ hours, minutes ->
         Log.d("SelectedTime","%$hours:$minutes")
@@ -81,7 +85,7 @@ fun AddScreen(modifier: Modifier = Modifier,
         time = ("$hours:$minutes")
     })
 
-    val coroutineScope = rememberCoroutineScope()
+    rememberCoroutineScope()
 
     val values = stringArrayResource(R.array.day_array)
     val dayValue = values.copyOfRange(0,values.size)
@@ -93,6 +97,9 @@ fun AddScreen(modifier: Modifier = Modifier,
 
 
     Scaffold(
+        /**
+         * floating action button are used to confirm the production of a data.
+         */
         floatingActionButton = {
             FloatingActionButton(onClick = {
                 insertDailies(
@@ -101,23 +108,40 @@ fun AddScreen(modifier: Modifier = Modifier,
                     hours = hoursVar,
                     minutes = minutesVar,
                     day = day
-                ) { newDailies ->
+                )
+                /**
+                 * The mutable values was directly inserted into the database
+                 */
+                { newDailies ->
                     insertDailies(newDailies)
                 }
+
+                /**
+                 * NavigateUp allows the user to return to the previous screen after the insertion
+                 */
                 navController.navigateUp()
             },
             ) {
+                /**
+                 * Icon are chosen from material 3 and it changes the visual of the floating action button.
+                 */
                 Icon (
                     imageVector = Icons.Filled.Check,
                     contentDescription = stringResource(R.string.add_dailies)
                 )
             }
         },
+        /**
+         * The top bar is created to hold the title and to hold an icon button
+         */
         topBar ={
             SmallTopAppBar(
                 title = {
                     Text(stringResource(R.string.add_dailies))
                 },
+                /**
+                 * icon button ar used to here to allow the user to go back so they're not forced in this screen
+                 */
                 navigationIcon = {
                     IconButton(
                         onClick = {
@@ -135,6 +159,10 @@ fun AddScreen(modifier: Modifier = Modifier,
         }
     ){innerPadding ->
         Column (
+
+            /**
+             * These values sets the locations of buttons in the center to set the M3 standard
+             */
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
             modifier = Modifier
@@ -161,10 +189,16 @@ fun AddScreen(modifier: Modifier = Modifier,
                 }
             )
 
+            /**
+             * Clockstate.show allows the clock state that was previously set to appear
+             */
             Button(onClick = {clockState.show()}) {
                 Text("Time picker")
             }
 
+            /**
+             * The text field here output the value from the clock state so the user know what they've inserted
+             */
             TextField(value = ("Time: $time"), onValueChange = {
                 time = it
             })
@@ -183,6 +217,10 @@ fun AddScreen(modifier: Modifier = Modifier,
 
 }
 
+/**
+ * This function inputs a button spinner/ drop down bar and it changes the value of the button spinner
+ * To the value that user selected using it
+ */
 @Composable
 fun DayInput(
     values: Array<String>,
@@ -198,6 +236,10 @@ fun DayInput(
     )
 }
 
+
+/**
+ * This function below is an text-field that updates it value to the one that user inserted.
+ */
 @Composable
 fun DescriptionInput(
     desc: String, modifier: Modifier, updateDesc: (String) -> Unit)
@@ -212,6 +254,9 @@ fun DescriptionInput(
     )
 }
 
+/**
+ * Identical to descriptionInput except for a different variable
+ */
 @Composable
 fun DailyNameInput(
     dailiesName: String, modifier: Modifier, updateName: (String) -> Unit)
@@ -224,7 +269,9 @@ OutlinedTextField(value = dailiesName,
     modifier = modifier )
 }
 
-
+/**
+ * The function below inserts the chosen value into the database
+ */
 
 fun insertDailies(name: String,
                   desc: String,
@@ -232,6 +279,9 @@ fun insertDailies(name: String,
                   minutes: Int,
                   day: String,
                   doInsert: (Dailies) -> Unit = {}) {
+    /**
+     * The if statement checks whether the the name is empty or not
+     */
     if (name.isNotEmpty()){
         val dailies = Dailies (
             id = 0,

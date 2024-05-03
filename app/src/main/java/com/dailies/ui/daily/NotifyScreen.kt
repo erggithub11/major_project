@@ -22,14 +22,15 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.dailies.model.Dailies
-import com.dailies.model.DailiesSearch
 import com.dailies.model.DailiesViewModel
 import com.dailies.ui.components.AddScaffold
 import com.dailies.ui.components.DailyCard
 import com.dailies.ui.navigation.Screen
 import com.dailies.ui.theme.DailiesTheme
 
-
+/**
+ * This class is identical to the daily screen except it uses a different list for filtering purposes
+ */
 @Composable
 fun NotifyScreenTopLevel(
     navController: NavHostController,
@@ -61,8 +62,7 @@ fun NotifyScreen(modifier: Modifier = Modifier, navController: NavHostController
     val coroutineScope = rememberCoroutineScope()
 
     AddScaffold (
-        navController = navController,
-        coroutineScope = coroutineScope
+        navController = navController
     )
 
 

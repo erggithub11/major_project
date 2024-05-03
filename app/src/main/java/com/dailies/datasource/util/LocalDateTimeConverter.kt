@@ -6,6 +6,9 @@ import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.*
 
+/**
+ * Legacy converter class that is left unused.
+ */
 object LocalDateTimeConverter {
     @TypeConverter
     @JvmStatic

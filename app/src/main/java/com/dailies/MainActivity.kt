@@ -1,10 +1,8 @@
 package com.dailies
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
@@ -19,20 +17,20 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.dailies.model.Dailies
 import com.dailies.model.DailiesViewModel
 import com.dailies.ui.add.AddScreenTopLevel
 import com.dailies.ui.daily.*
-
 import com.dailies.ui.edit.EditScreenTopLevel
 import com.dailies.ui.home.HomeScreenTopLevel
 import com.dailies.ui.navigation.Screen
 import com.dailies.ui.settings.SettingScreenTopLevel
 import com.dailies.ui.theme.DailiesTheme
 import com.dailies.ui.week.WeekScreenTopLevel
-import java.time.DayOfWeek
 
 
+/**
+ * Main activity is where the program starts
+ */
 class MainActivity : ComponentActivity() {
 
 
@@ -40,6 +38,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            /**
+             * DAILIES theme is used here so that the entire program follows the colour scheme
+             */
             DailiesTheme(dynamicColor = false) {
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -53,6 +54,9 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+/**
+ * The navigation graph is important to the rest of the program as it builds a connection to different screens
+ */
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 private fun BuildNavigationGraph(
@@ -61,13 +65,19 @@ private fun BuildNavigationGraph(
 
 ) {
     val navController = rememberNavController()
+
+    /**
+     * start destination is used so the program know which screen to output first when opening the app
+     */
     val startDestination = remember { Screen.Home.route}
-    var currentDaily = Dailies(0,"","",DayOfWeek.MONDAY,0,0,false)
 
     NavHost(
         navController = navController,
         startDestination = startDestination
     ) {
+        /**
+         * all the screen that are used have to be listed in the navGraph builder below
+         */
         composable(Screen.Home.route){
             HomeScreenTopLevel(navController)
         }

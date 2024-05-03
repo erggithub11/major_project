@@ -24,14 +24,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.dailies.R
 import com.dailies.model.Dailies
-import com.dailies.model.DailiesSearch
 import com.dailies.model.DailiesViewModel
 import com.dailies.ui.components.DailyCard
 import com.dailies.ui.components.MainScaffold
 import com.dailies.ui.navigation.Screen
 import com.dailies.ui.theme.DailiesTheme
 
-
+/**
+ * This class is identical to the daily screen except it uses a different list for filtering purposes
+ */
 @Composable
 fun SaturdayScreenTopLevel(
     navController: NavHostController,
@@ -43,35 +44,28 @@ fun SaturdayScreenTopLevel(
     SaturdayScreen(
         navController = navController,
         dailiesList = dailyList,
-        dailiesSearch = dailiesViewModel.dailiesSearch,
-        updateSearchCriteria = { dailiesSearch ->
-            dailiesViewModel.updateDailiesSearch(dailiesSearch)
-        },
         removeDailies = {newDailies ->
             dailiesViewModel.removeDailies(newDailies)
         },
-        dailiesUpdate = {newDailies ->
-            dailiesViewModel.updateDaily(newDailies)
-        },
-    )
+    ) { newDailies ->
+        dailiesViewModel.updateDaily(newDailies)
+    }
 }
 
 @Composable
-fun SaturdayScreen(modifier: Modifier = Modifier,
-                 navController: NavHostController,
-                 dailiesList: List<Dailies> =  listOf(),
-                 dailiesSearch: DailiesSearch = DailiesSearch(),
-                 updateSearchCriteria: (DailiesSearch) -> Unit = {},
-                 removeDailies: (Dailies) -> Unit = {},
-                 dailiesUpdate: (Dailies) -> Unit = {},
+fun SaturdayScreen(
+    modifier: Modifier = Modifier,
+    navController: NavHostController,
+    dailiesList: List<Dailies> = listOf(),
+    removeDailies: (Dailies) -> Unit = {},
+    dailiesUpdate: (Dailies) -> Unit = {},
 
-                 ){
+    ){
 
-    val coroutineScope = rememberCoroutineScope()
+    rememberCoroutineScope()
 
     MainScaffold (
-        navController = navController,
-        coroutineScope = coroutineScope
+        navController = navController
     )
 
 
@@ -81,7 +75,7 @@ fun SaturdayScreen(modifier: Modifier = Modifier,
                 .padding(innerPadding)
                 .fillMaxSize()
         ) {
-            val dayList = stringArrayResource(id = R.array.day_array).toList()
+            stringArrayResource(id = R.array.day_array).toList()
             val context = LocalContext.current
             val state = rememberLazyGridState()
             val notificationService= NotificationService(context)

@@ -8,22 +8,24 @@ import androidx.compose.material.icons.filled.AlarmOff
 import androidx.compose.material.icons.filled.AlarmOn
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.dailies.model.Dailies
-import androidx.compose.material3.Text
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.ui.res.stringResource
 import com.dailies.R
+import com.dailies.model.Dailies
 import com.dailies.ui.theme.md_theme_light_onPrimary
 
-
+/**
+ * The card class stores a funciton that reads a list into a class and outputs data on the individual data.
+ *
+ */
 @Composable
 fun DailyCard(
     dailies: Dailies,
@@ -36,20 +38,32 @@ fun DailyCard(
     Card(
         modifier = Modifier.fillMaxSize()
     ){
+
+        /**
+         * The constraint layout allows the data to be formatted in a specific way that matches my ideals
+         */
         ConstraintLayout {
             val(nameRef,timeRef
                     ,deleteRef,selectRef,descRef,editRef,unnotifyRef
             ) = createRefs()
-
+            /**
+             * Hour and minutes are int values and are needed to be translated into string prior use
+             */
             val hourText = dailies.hour.toString()
             val minuteText = dailies.minute.toString()
 
             Text(
+                /**
+                 * The name attribute is already in text and so it can be used directly in the text()
+                 */
                 text = dailies.name,
                 fontSize = 30.sp,
                 modifier = Modifier
 
                     .padding()
+                    /**
+                     * I gave the title a specific background colour to show its a new value in the array
+                     */
                     .background(color = md_theme_light_onPrimary )
                     .constrainAs(nameRef) {
                         top.linkTo(parent.top)
@@ -79,6 +93,10 @@ fun DailyCard(
             )
 
 
+            /**
+             * These icon buttons are linked to an action but these actions are not set up here, rather it's set up
+             * when it is used in the screens.
+             */
             IconButton(onClick = {
                 deleteAction(dailies)},
                 modifier = Modifier
@@ -90,6 +108,9 @@ fun DailyCard(
 
                     }
             ) {
+                /**
+                 * The icons are taken from M3 and it has different colour scheme to make its use more intuitive
+                 */
                 Icon(
                     imageVector = Icons.Filled.Delete,
                     tint = MaterialTheme.colorScheme.error,

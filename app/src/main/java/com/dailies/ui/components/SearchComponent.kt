@@ -8,12 +8,14 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 import com.dailies.model.DailiesSearch
 
+/**
+ * This class is used to search certain values when used with the card layouts
+ * It is unfinished and would've been expanded but as of right now it only contains a button spinner
+ */
 @Composable
 fun SearchComponent(
     modifier: Modifier = Modifier,
-    dailiesSearch: DailiesSearch,
     dayList:List<String>,
-//    nameSearch: String,
     updateSearch: (DailiesSearch) -> Unit = {}
 ){
     Card(

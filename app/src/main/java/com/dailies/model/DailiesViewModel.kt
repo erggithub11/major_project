@@ -8,16 +8,22 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.dailies.R
+import com.dailies.datasource.DailiesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.DayOfWeek
-import com.dailies.datasource.DailiesRepository
-import com.dailies.ui.navigation.Screen
 import java.util.Locale
 
+/**
+ *  ViewModel are responsible for managing data within the activity
+ */
 class DailiesViewModel (application: Application) : AndroidViewModel(application){
     private val repository: DailiesRepository = DailiesRepository(application)
 
+
+    /**
+     * Multiple list created for different screens that outputs different values.
+     */
     var dailyList: LiveData<List<Dailies>> = repository.getAllDaily()
         private set
 
@@ -45,6 +51,9 @@ class DailiesViewModel (application: Application) : AndroidViewModel(application
     var notifyList: LiveData<List<Dailies>> = repository.getDailiesByNotify(true)
         private set
 
+    /**
+     * Current daily holds the value of a single daily that can be used anywhere else.
+     */
     var currentDaily by mutableStateOf<Dailies?>(null)
         private set
 
@@ -53,6 +62,9 @@ class DailiesViewModel (application: Application) : AndroidViewModel(application
         return repository.getAllDaily()
     }
 
+    /**
+     * Crud options for daily management
+     */
     fun insertDailies(newDailies:Dailies){
         viewModelScope.launch(Dispatchers.IO){
             repository.insert(newDailies)
@@ -65,6 +77,9 @@ class DailiesViewModel (application: Application) : AndroidViewModel(application
         }
     }
 
+    /**
+     * These are left over values used for search components, unused in the very end.
+     */
     private val anyDay = application.resources.getStringArray(R.array.day_array)[0]
     private val anyName = application.resources.getStringArray(R.array.day_array)[0]
 

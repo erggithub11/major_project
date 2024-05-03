@@ -8,6 +8,10 @@ import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import kotlin.random.Random
 
+/**
+ * The foreground service is unfinished design left over during development. It use was to produce notification
+ * even when the app is closed but it unfinished and therefore will not be commentated
+ */
 class ForegroundService : Service(){
 
 

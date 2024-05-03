@@ -44,35 +44,36 @@ fun DailyScreenTopLevel(
     DailyScreen(
         navController = navController,
         dailiesList = dailyList,
-        dailiesSearch = dailiesViewModel.dailiesSearch,
         updateSearchCriteria = { dailiesSearch ->
             dailiesViewModel.updateDailiesSearch(dailiesSearch)
         },
         removeDailies = {newDailies ->
             dailiesViewModel.removeDailies(newDailies)
         },
-        dailiesUpdate = {newDailies ->
-            dailiesViewModel.updateDaily(newDailies)
-        },
-    )
+    ) { newDailies ->
+        dailiesViewModel.updateDaily(newDailies)
+    }
 }
 
+
+/**
+ * This screen contains the card layout,search components and many more. It is used as the mainframe for the
+ * Database visual and its variant are used else where.
+ */
 @Composable
-fun DailyScreen(modifier: Modifier = Modifier,
-                navController: NavHostController,
-                dailiesList: List<Dailies> =  listOf(),
-                dailiesSearch: DailiesSearch = DailiesSearch(),
-                updateSearchCriteria: (DailiesSearch) -> Unit = {},
-                removeDailies: (Dailies) -> Unit = {},
-                dailiesUpdate: (Dailies) -> Unit = {},
+fun DailyScreen(
+    modifier: Modifier = Modifier,
+    navController: NavHostController,
+    dailiesList: List<Dailies> = listOf(),
+    updateSearchCriteria: (DailiesSearch) -> Unit = {},
+    removeDailies: (Dailies) -> Unit = {},
+    dailiesUpdate: (Dailies) -> Unit = {},
+    ){
 
-                ){
-
-    val coroutineScope = rememberCoroutineScope()
+    rememberCoroutineScope()
 
     MainScaffold (
-        navController = navController,
-        coroutineScope = coroutineScope
+        navController = navController
     )
 
 
@@ -82,12 +83,16 @@ fun DailyScreen(modifier: Modifier = Modifier,
                 .padding(innerPadding)
                 .fillMaxSize()
         ) {
+
+            /**
+             * Day list value are needed to be produced here so it can be used within the search component
+             */
             val dayList = stringArrayResource(id = R.array.day_array).toList()
             val context = LocalContext.current
             val state = rememberLazyGridState()
             val notificationService= NotificationService(context)
 
-            SearchComponent(dailiesSearch = dailiesSearch, dayList = dayList){
+            SearchComponent(dayList = dayList){
                 updateSearchCriteria(it)
             }
 
@@ -100,21 +105,42 @@ fun DailyScreen(modifier: Modifier = Modifier,
             {
                 items(dailiesList){
                     DailyCard(
+                        /**
+                         * The dailies data allows the data to be outputted into strings
+                         */
                         dailies = it,
+                        /**
+                         * The functions below are activated where the buttons are pressed
+                         */
                         thirtyMinAction = { dailies ->
+                            /**
+                             * Toast are pop up window that comes up when activated
+                             */
                             Toast.makeText(context,"Notification for ${dailies.name} will activate in 30 minute",Toast.LENGTH_LONG ).show()
                             dailies.notify = true
+                            /**
+                             * Notify value is changed to true prior update
+                             * Notify value will not be changed to true outside of this program if it didn't get updated via dao
+                             */
                             dailiesUpdate(dailies)
+                            /**
+                             * notification function requires specific value from the dailies
+                             */
                             notificationService.show30MinDailiesNotification(dailies.name,dailies.description,dailies.hour,dailies.minute)
 
                         },
                         editAction = {dailies ->
                             Toast.makeText(context,"Edit ${dailies.name}",Toast.LENGTH_LONG ).show()
+                            /**
+                             * The variable below are saved into the dailies viewmodel so it can be reused in the edit screen
+                             */
                             DailiesViewModel.currentDaily = dailies
-                            Log.d("editScreen", DailiesViewModel.currentDaily.name)
                             navController.navigate(route = Screen.Edit.route)
                         },
                         deleteAction = {dailies ->
+                            /**
+                             * Dailies are removed via the use of dao
+                             */
                             removeDailies(dailies)
                             Toast.makeText(context,"Delete ${dailies.name}",Toast.LENGTH_LONG ).show()
                         }
@@ -123,8 +149,6 @@ fun DailyScreen(modifier: Modifier = Modifier,
                             Toast.makeText(context,"${dailies.name} has been turned off",Toast.LENGTH_LONG ).show()
                             dailies.notify = false
                             dailiesUpdate(dailies)
-
-
                         }
                     )
                 }

@@ -23,6 +23,9 @@ import com.dailies.R
 import com.dailies.ui.components.NavBarScaffold
 import com.dailies.ui.navigation.Screen
 
+/**
+ * The week screen is accessible from the home screen and is used to contain many other navigation options
+ */
 
 @Composable
 fun WeekScreenTopLevel(
@@ -38,10 +41,15 @@ fun WeekScreenTopLevel(
 fun WeekScreen(modifier: Modifier = Modifier,
                navController: NavHostController){
 
-    val coroutineScope = rememberCoroutineScope()
+    rememberCoroutineScope()
 
-    NavBarScaffold(navController = navController,
-        coroutineScope = coroutineScope) {
+
+    /**
+     * The week screen uses the navbar scaffold and a large amount of buttons
+     */
+    NavBarScaffold(
+        navController = navController
+    ) {
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -57,6 +65,9 @@ fun WeekScreen(modifier: Modifier = Modifier,
                 modifier = Modifier.padding(start = 8.dp)
             )
 
+            /**
+             * The rows are used for superior formatting and to evenly spread the button out
+             */
             Row(
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 modifier = Modifier.fillMaxWidth().padding(8.dp)

@@ -1,10 +1,7 @@
 package com.dailies.ui.home
 
-import com.dailies.NotificationService
-import android.Manifest
 import android.icu.util.Calendar
 import android.os.Build
-import android.os.Handler
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -23,9 +20,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.Alignment
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -57,8 +52,11 @@ fun HomeScreen(modifier: Modifier = Modifier,
     navController: NavHostController){
 
 
+    /**
+     * The values below are meant to ask the user for permission when first opening up the application
+     */
     val context = LocalContext.current
-    val launcher = rememberLauncherForActivityResult(
+    rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
         Toast.makeText(context,"isGranted = $isGranted",Toast.LENGTH_SHORT).show()
@@ -67,10 +65,14 @@ fun HomeScreen(modifier: Modifier = Modifier,
 
 
 
-    val coroutineScope = rememberCoroutineScope()
+    rememberCoroutineScope()
 
-    NavBarScaffold(navController = navController,
-        coroutineScope = coroutineScope) {
+    /**
+     * Navigation bar below are from the class with the same name
+     */
+    NavBarScaffold(
+        navController = navController
+    ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = modifier
@@ -79,6 +81,9 @@ fun HomeScreen(modifier: Modifier = Modifier,
                 .verticalScroll(rememberScrollState()),
         ) {
 
+            /**
+             * Image() allows painterResoucre to be used and painter resource allows the access of images
+             */
             Image (
                 modifier = Modifier
                     .fillMaxWidth()
@@ -90,6 +95,10 @@ fun HomeScreen(modifier: Modifier = Modifier,
 
             GetTime()
 
+
+            /**
+             * Basicaly button which navigates onclick
+             */
 
             Button(onClick = {navController.navigate(route = Screen.Notify.route)},
                 modifier = modifier.padding()) {
@@ -116,13 +125,20 @@ fun HomeScreen(modifier: Modifier = Modifier,
 
 }
 
+
+/**
+ * This function below gets the current time of the device and formatted into a readable format
+ */
 @Composable
 fun GetTime(){
+    /**
+     * calender.getinstance gets the date of the celluar device as the second half of th format
+     */
     val calendar = Calendar.getInstance().time
-    val time = DateFormat.getTimeInstance(DateFormat.SHORT).format(calendar)
+    val mobileTime = DateFormat.getTimeInstance(DateFormat.SHORT).format(calendar)
     Text(modifier = Modifier,
         fontSize = 40.sp,
-            text = time
+            text = mobileTime
         )
 }
 

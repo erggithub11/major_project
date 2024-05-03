@@ -4,40 +4,27 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddAlarm
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.SnackbarData
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
-import kotlinx.coroutines.CoroutineScope
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SmallTopAppBar
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.*
-
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavHostController
 import com.dailies.R
 import com.dailies.ui.navigation.Screen
-import kotlinx.coroutines.launch
 
-
+/**
+ * The main scaffold that will be used in many screens, It holds a back button
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScaffold (
     navController: NavHostController,
-    floatingActionButton: @Composable () -> Unit = { },
-    snackbarContent: @Composable (SnackbarData) -> Unit = {},
-    coroutineScope: CoroutineScope,
-    snackbarHostState: SnackbarHostState? = null,
     pageContent: @Composable (innerPadding: PaddingValues) -> Unit = {},
     ){
     Scaffold(
         topBar = {
+            /**
+             * Top app bar ensures the scaffold appear at the top of the screen
+             */
             TopAppBar(title = {
             },
                 navigationIcon = {
@@ -54,14 +41,14 @@ fun MainScaffold (
         }
     )
 }
+
+/**
+ * This scaffold is used when going into a daily screen. It contains an extra button which allows navigation into the add screen.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddScaffold (
     navController: NavHostController,
-    floatingActionButton: @Composable () -> Unit = { },
-    snackbarContent: @Composable (SnackbarData) -> Unit = {},
-    coroutineScope: CoroutineScope,
-    snackbarHostState: SnackbarHostState? = null,
     pageContent: @Composable (innerPadding: PaddingValues) -> Unit = {},
 ){
     Scaffold(
@@ -93,14 +80,12 @@ fun AddScaffold (
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+/**
+ * This scaffold holds a bottom bar that contains the navigaiton bar
+ */
 @Composable
 fun NavBarScaffold (
     navController: NavHostController,
-    floatingActionButton: @Composable () -> Unit = { },
-    snackbarContent: @Composable (SnackbarData) -> Unit = {},
-    coroutineScope: CoroutineScope,
-    snackbarHostState: SnackbarHostState? = null,
     pageContent: @Composable (innerPadding: PaddingValues) -> Unit = {},
 
 

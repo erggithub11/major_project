@@ -13,10 +13,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.DayOfWeek
-import java.time.LocalDateTime
 
 @Database(entities = [Dailies::class],version = 1)
-@TypeConverters(DayConverter::class, LocalDateTimeConverter::class,)
+@TypeConverters(DayConverter::class, LocalDateTimeConverter::class)
 abstract class DailiesDatabase: RoomDatabase() {
 
     abstract fun dailiesDao(): DailiesDao
@@ -26,6 +25,10 @@ abstract class DailiesDatabase: RoomDatabase() {
         private var instance: DailiesDatabase? = null
         private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
+
+        /**
+         * Getting the database value but it contains an if statement which produces a preset if no database is to be found.
+         */
         @Synchronized
         fun getDatabase(context: Context): DailiesDatabase? {
             if (instance == null) {
@@ -42,7 +45,10 @@ abstract class DailiesDatabase: RoomDatabase() {
             return instance
         }
 
-        private fun roomDatabaseCallback(context: Context): RoomDatabase.Callback {
+        /**
+         *
+         */
+        private fun roomDatabaseCallback(context: Context): Callback {
             return object : Callback() {
                 override fun onCreate(db: SupportSQLiteDatabase) {
                     super.onCreate(db)
@@ -57,7 +63,7 @@ abstract class DailiesDatabase: RoomDatabase() {
             instance: DailiesDatabase
         ){
             /**
-             *  An Example for testing
+             *  Preset data produced for testing.
              *
              */
             val daily1 = Dailies(
@@ -108,7 +114,7 @@ abstract class DailiesDatabase: RoomDatabase() {
 
             )
             /**
-             *All the premade exercises will be put within a list and the list will be used in the dao to be put into the database
+             *Preset dailies where put into a mutable list
              */
             val dailiesList = mutableListOf(
                 daily1,
@@ -117,6 +123,10 @@ abstract class DailiesDatabase: RoomDatabase() {
                 daily4,
                 daily5
             )
+
+            /**
+             * The mutableList previously produced is inserted into the database via dao.
+             */
 
             val dao = instance.dailiesDao()
             dao.insertMultipleDaily(dailiesList)

@@ -44,6 +44,9 @@ import com.maxkeppeler.sheets.clock.ClockDialog
 import com.maxkeppeler.sheets.clock.models.ClockSelection
 import java.time.DayOfWeek
 
+/**
+ * This screen is identical to add screen except it reads in previous values and contains remove dao
+ */
 @Composable
 fun EditScreenTopLevel(
     navController: NavHostController,
@@ -55,24 +58,26 @@ fun EditScreenTopLevel(
         insertDailies = { newDailies ->
             dailiesViewModel.insertDailies(newDailies)
         },
-        removeDailies = { newDailies ->
-            dailiesViewModel.removeDailies(newDailies)
-        },
-    )
+    ) { newDailies ->
+        dailiesViewModel.removeDailies(newDailies)
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditScreen(modifier: Modifier = Modifier,
-              navController: NavHostController,
-               insertDailies: (Dailies) -> Unit = {},
-               removeDailies: (Dailies) -> Unit = {}
+fun EditScreen(
+    navController: NavHostController,
+    insertDailies: (Dailies) -> Unit = {},
+    removeDailies: (Dailies) -> Unit = {}
 
 ){
 
 
     var time by rememberSaveable{ mutableStateOf("") }
 
+    /**
+     * These values are uses current daily so it remembers the values of data that the user chosen that they wanted to edit
+     */
     var hoursVar by rememberSaveable{ mutableStateOf(DailiesViewModel.currentDaily.hour) }
     var minutesVar by rememberSaveable{ mutableStateOf(DailiesViewModel.currentDaily.minute) }
 
@@ -85,15 +90,15 @@ fun EditScreen(modifier: Modifier = Modifier,
         time = ("$hours:$minutes")
     })
 
-    val coroutineScope = rememberCoroutineScope()
+    rememberCoroutineScope()
 
     val values = stringArrayResource(R.array.day_array)
     val dayValue = values.copyOfRange(0,values.size)
 
 
     var day by rememberSaveable { mutableStateOf( DailiesViewModel.currentDaily.day.toString() ) }
-    var dailiesName by rememberSaveable{ mutableStateOf("${DailiesViewModel.currentDaily.name}") }
-    var description by rememberSaveable{ mutableStateOf("${DailiesViewModel.currentDaily.description}") }
+    var dailiesName by rememberSaveable{ mutableStateOf(DailiesViewModel.currentDaily.name) }
+    var description by rememberSaveable{ mutableStateOf(DailiesViewModel.currentDaily.description) }
 
 
 
@@ -101,6 +106,9 @@ fun EditScreen(modifier: Modifier = Modifier,
         floatingActionButton = {
             FloatingActionButton(onClick = {
 
+                /**
+                 * The previous data is removed prior the insertion of the new daily
+                 */
                 removeDailies {
                         oldDailies ->
                     removeDailies(oldDailies)

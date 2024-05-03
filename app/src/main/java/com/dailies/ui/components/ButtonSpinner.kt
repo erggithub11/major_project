@@ -22,6 +22,9 @@ import androidx.compose.ui.unit.sp
 import com.dailies.R
 import com.dailies.ui.theme.DailiesTheme
 
+/**
+ * The button spinner is a expanded DropDownMenu that reads in data into options for the menu
+ */
 @Composable
 fun ButtonSpinner(
     items: List<String>,
@@ -35,6 +38,9 @@ fun ButtonSpinner(
 
     OutlinedButton(
         modifier = modifier,
+        /**
+         * The expanded option allows the drop down menu to open up when selected so it doesn't take up too much space
+         */
         onClick = { expanded = !expanded }
     ){
         Text(
@@ -53,6 +59,9 @@ fun ButtonSpinner(
             onDismissRequest = { expanded = false }
         ){
 
+            /**
+             * For each allows the menu to to absorb the given array to produce a specific drop down bar
+             */
             items.forEach {
                 
                 DropdownMenuItem(

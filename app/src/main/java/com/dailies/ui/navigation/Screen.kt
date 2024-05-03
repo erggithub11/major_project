@@ -1,5 +1,8 @@
 package com.dailies.ui.navigation
 
+/**
+ * This class contains all the screens that the navigation required to access
+ */
 sealed class Screen (
     val route: String
 ){
@@ -25,6 +28,9 @@ sealed class Screen (
 
 }
 
+/**
+ * The val below is used in navigation bar
+ */
 val screens = listOf(
     Screen.Home,
     Screen.Week,

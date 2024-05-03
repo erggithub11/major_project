@@ -8,7 +8,7 @@ import java.time.DayOfWeek
 object DayConverter {
 
     /**
-     *  Used to convert day of week enum to string
+     *  Used to convert DayOfWeek into strings via to.String() function
      *
      */
     @TypeConverter
@@ -18,7 +18,7 @@ object DayConverter {
 
 
     /**
-     * Used to convert string to day of week enum
+     * Used to convert strings to DayoOfWeek enum values.
      *
      */
     @TypeConverter
